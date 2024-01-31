@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:z_learning/pages/homepage/widget/card.dart';
+import 'package:z_learning/pages/homepage/widget/search_field.dart';
+import 'package:z_learning/utils/themes.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -6,7 +9,60 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 50),
+              Row(
+                children: [
+                  SearchFieldWidget(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.favorite_outline_outlined),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.mark_chat_unread_outlined),
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        image: AssetImage("assets/banner1.jpg"),
+                        fit: BoxFit.cover),
+                  )),
+              SizedBox(height: 50),
+              Text(
+                "Popular Courses",
+                style: tsBodyLargeSemiboldBlack,
+              ),
+              GridView.builder(
+                itemCount: 5,
+                shrinkWrap: true,
+                padding: EdgeInsets.only(top: 20),
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 16,
+                  childAspectRatio: 0.6,
+                ),
+                itemBuilder: (context, index) {
+                  return CardCourse();
+                },
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
