@@ -7,12 +7,11 @@ class CardCourse extends StatelessWidget {
   final String price;
   final String image;
 
-  CardCourse({
-    required this.title,
-    required this.pengajar, 
-    required this.price,
-    required this.image
-    });
+  CardCourse(
+      {required this.title,
+      required this.pengajar,
+      required this.price,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +34,11 @@ class CardCourse extends StatelessWidget {
               height: 150,
               width: 200,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
-                image: DecorationImage(
-                    image: NetworkImage(image), fit: BoxFit.cover)
-              ),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
+                  image: DecorationImage(
+                      image: NetworkImage(image), fit: BoxFit.cover)),
             ),
             SizedBox(height: 10),
             Container(
@@ -57,8 +55,9 @@ class CardCourse extends StatelessWidget {
                       pengajar,
                       style: tsLabelRegularBlack,
                     ),
+                    SizedBox(height: 5),
                     Text(
-                      price,
+                      "\$" + price,
                       style: tsBodySmallMediumBlack,
                     ),
                   ]),
