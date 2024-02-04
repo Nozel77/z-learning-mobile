@@ -21,12 +21,11 @@ class LearningController extends GetxController {
       if ( response.statusCode == 200 ) {
         final List<dynamic> LearningList = response.data["data"];      
         learningResponseModel.value = LearningList.map((json) => Learning.fromJson(json)).toList();
-        print(learningResponseModel.value[0].title);
       } else {
-        print("Failed to fetch tea. Status code: ${response.statusCode}");
+        print("Failed to fetch learning. Status code: ${response.statusCode}");
       }
     } catch (error) {
-      print("Error while fetching tea: $error");
+      print("Error while fetching learning: $error");
     }
   }
 }

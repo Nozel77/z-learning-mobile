@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:z_learning/pages/detail_card/detail_card.dart';
 import 'package:z_learning/pages/homepage/widget/card.dart';
 import 'package:z_learning/pages/homepage/widget/search_field.dart';
 import 'package:z_learning/service/learning_controller.dart';
@@ -47,35 +48,39 @@ class Homepage extends StatelessWidget {
                 style: tsBodyLargeSemiboldBlack,
               ),
               Obx(() => Container(
-                padding: EdgeInsets.only(top: 20),
-                child: GridView.builder(
-                itemCount: learningController.learningResponseModel.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.only(top: 20),
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.6,
-                ),
-                itemBuilder: (context, index) {
-                  final learn = learningController.learningResponseModel[index];
-                  print(learningController.learningResponseModel[index]);
-                  return InkWell(
-                    child: Container(
-                      child: CardCourse(
-                        title: learn.title,
-                        pengajar: learn.instructor,
-                        price: learn.price.toString(),
-                        image: learn.images,
+                    padding: EdgeInsets.only(top: 20),
+                    child: GridView.builder(
+                      itemCount:
+                          learningController.learningResponseModel.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(top: 20),
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 16,
+                        childAspectRatio: 0.6,
                       ),
+                      itemBuilder: (context, index) {
+                        final learn =
+                            learningController.learningResponseModel[index];
+                        print(learningController.learningResponseModel[index]);
+                        return InkWell(
+                          onTap: () {
+                            Get.to(() => DetailCard(), arguments: learningController.learningResponseModel[index]);
+                          },
+                          child: Container(
+                            child: CardCourse(
+                              title: learn.title,
+                              pengajar: learn.instructor,
+                              price: learn.price.toString(),
+                              image: learn.images,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-              ))
-              
+                  ))
             ],
           ),
         ),
