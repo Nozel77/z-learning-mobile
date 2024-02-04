@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:z_learning/utils/themes.dart';
 
 class CardCourse extends StatelessWidget {
-  // final String title;
-  // final String subtitle;
-  const CardCourse({super.key});
+  final String title;
+  final String pengajar;
+  final String price;
+  final String image;
+
+  CardCourse({
+    required this.title,
+    required this.pengajar, 
+    required this.price,
+    required this.image
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +39,7 @@ class CardCourse extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 image: DecorationImage(
-                    image: AssetImage("assets/banner.jpg"), fit: BoxFit.cover),
+                    image: NetworkImage(image), fit: BoxFit.cover)
               ),
             ),
             SizedBox(height: 10),
@@ -41,16 +49,16 @@ class CardCourse extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Become Pro Adobe",
-                      style: tsBodyMediumSemiboldBlack,
+                      title,
+                      style: tsBodySmallMediumBlack,
                     ),
                     SizedBox(height: 5),
                     Text(
-                      "Lets learn about Adobe XD",
-                      style: tsBodySmallMediumBlack,
+                      pengajar,
+                      style: tsLabelRegularBlack,
                     ),
                     Text(
-                      "\$99",
+                      price,
                       style: tsBodySmallMediumBlack,
                     ),
                   ]),
