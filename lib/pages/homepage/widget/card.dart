@@ -46,9 +46,12 @@ class CardCourse extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: tsBodySmallMediumBlack,
+                    Container(
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: tsBodySmallMediumBlack,
+                      ),
                     ),
                     SizedBox(height: 5),
                     Text(

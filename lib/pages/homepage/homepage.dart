@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:z_learning/pages/detail_card/detail_card.dart';
+import 'package:z_learning/pages/favorite_page/favorite_page.dart';
 import 'package:z_learning/pages/homepage/widget/card.dart';
 import 'package:z_learning/pages/homepage/widget/search_field.dart';
 import 'package:z_learning/service/learning_controller.dart';
@@ -23,7 +24,9 @@ class Homepage extends StatelessWidget {
                 children: [
                   SearchFieldWidget(),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(FavoritePage());
+                    },
                     icon: Icon(Icons.favorite_outline_outlined),
                   ),
                   IconButton(
@@ -67,7 +70,9 @@ class Homepage extends StatelessWidget {
                         print(learningController.learningResponseModel[index]);
                         return InkWell(
                           onTap: () {
-                            Get.to(() => DetailCard(), arguments: learningController.learningResponseModel[index]);
+                            Get.to(() => DetailCard(),
+                                arguments: learningController
+                                    .learningResponseModel[index]);
                           },
                           child: Container(
                             child: CardCourse(

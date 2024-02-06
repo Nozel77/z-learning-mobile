@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:z_learning/database/database.dart';
 import 'package:z_learning/service/learning_controller.dart';
 import 'package:z_learning/service/learning_model.dart';
 import 'package:z_learning/utils/themes.dart';
@@ -11,7 +12,20 @@ class DetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Learning learn = data;
+    final bool isFavorite = learningController.isCourseFavorite(learn);
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        title: Text(
+          "Detail Course",
+          style: tsBodyMediumSemiboldBlack,
+        ),
+      ),
       body: Container(
         margin: EdgeInsets.all(20),
         child: Column(
@@ -60,10 +74,29 @@ class DetailCard extends StatelessWidget {
             ),
             SizedBox(height: 20),
             IconButton(
-                onPressed: () {}, icon: Icon(Icons.favorite_outline_outlined))
+                onPressed: () {
+                  toggleFavorite(learn, isFavorite);
+                },
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_outline_outlined,
+                  color: isFavorite
+                      ? Colors.red
+                      : null, 
+                ))
           ],
         ),
       ),
     );
+  }
+
+  void toggleFavorite(Learning learn, bool isCurrentlyFavorite) {
+    if (isCurrentlyFavorite) {
+      learningController.removeFromFavorites(learn);
+      DatabaseHelper().deleteFavorite(learn.id);
+    } else {
+      learningController.addToFavorites(learn);
+      DatabaseHelper().insertFavorite(learn);
+    }
+    learningController.update();
   }
 }
